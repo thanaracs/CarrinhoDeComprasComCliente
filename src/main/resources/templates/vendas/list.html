@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+</head>
+
+<body>
+<div th:insert="fragments/header :: modelheader"></div>
+
+<div class="container">
+
+    <table class="table" >
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Data</th>
+            <th>Qtd. Item</th>
+            <th>Cliente</th>
+            <th>Valor</th>
+        </tr>
+        </thead>
+
+        <tr th:each="v : ${vendas}">
+            <td th:text="${v.idVenda}"> </td>
+            <td th:text="${v.localDate}"> </td>
+            <td th:text="${v.QtdTotalItem}"> </td>
+            <td th:text="${v.cliente.getNome()}"> </td>
+            <td th:text="'R$: ' + ${v.TotalVenda()}"> </td>
+        </tr>
+
+    </table>
+</div>
+
+
+<div th:insert="fragments/footer :: modelfooter"></div>
+</body>
+
+</html>

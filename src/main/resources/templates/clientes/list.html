@@ -1,0 +1,39 @@
+<html>
+<head>
+    <title>Lista de Clientes</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="jumbotron">
+<div th:insert="fragments/header :: modelheader"></div>
+<div class="container">
+    <table class="table table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Venda</th>
+            <th colspan="2" class="text-center">Opções</th>
+        </tr>
+        </thead>
+        <tr th:each="c : ${clientePF}">
+            <td scope="row" th:text="${c.idCliente}"> </td>
+            <td th:text="${c.nome}"> </td>
+            <td th:text="${c.CPF}"> </td>
+            <td th:text="${c.getVenda}"> </td>
+            <td><a role="button" class="btn btn-primary" th:href="@{/clientes/edit/{idCliente}(idCliente=${c.idCliente})}" >Editar</a> </td>
+            <td><a role="button" class="btn btn-danger" onclick="return window.confirm('Tem certeza que deseja excluir este Produto?')"  th:href="@{/clientes/remove/{idCliente}(idCliente=${c.idCliente})}">Excluir</a> </td>
+        </tr>
+    </table>
+    <a role="button" class="btn btn-secondary" th:href="@{/clientes/form}">Voltar</a>
+</div>
+<div th:insert="fragments/footer :: modelfooter"></div>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+    body {
+        font-family: 'Noto Sans', sans-serif;
+    }
+</style>
+</html>

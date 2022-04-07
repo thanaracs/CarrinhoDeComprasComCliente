@@ -1,0 +1,103 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+</head>
+
+<body >
+
+<div th:insert="fragments/header :: modelheader"></div>
+<div class="container">
+<!--CATALOGO DE PRODUTOS-->
+<div class="catalogo">
+    <h3 class="home flow-text">Catalogo de produtos</h3>
+    <table class="table table-bordered ">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Produto</th>
+        <th>Valor</th>
+        <th>Quantidade</th>
+    </tr><br>
+    </thead>
+    <tbody>
+    <tr th:each="p : ${produto}">
+        <td th:text="${p.idProduto}"> </td>
+        <td th:text="${p.descricao}"> </td>
+        <td th:text="'R$: ' +${p.valor}"> </td>
+
+        <td>
+            <input type="hidden" th:value="${p.descricao}">
+            <input type="hidden" th:value="${p.valor}">
+            <form th:action="@{/vendas/add}" th:object="${itemVenda}" method="post">
+                <input th:value="${p.idProduto}" th:name="produto.idProduto" type="hidden">
+                <input type="number" class="qtd" required th:field="*{quantidade}">
+                <input type="submit" class="btn btn-info" value="+">
+
+            </form>
+        </td>
+    </tr>
+    </tbody>
+    </table><br>
+</div>
+<!--CARRINHO DE COMPRAS-->
+<div class="carrinho">
+    <h3>Carrinho de compras</h3><br>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th>Total</th>
+            <th>Ação</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="i: ${session.venda.itemVenda}">
+            <td th:text="${i.produto.idProduto}"> </td>
+            <td th:text="${i.produto.descricao}"> </td>
+            <td th:text="${i.quantidade}"> </td>
+            <td th:text="'R$: ' +${i.TotalItem()}"> </td>
+            <td><a class="btn btn-danger" th:href="@{/vendas/remover/{id}(id=${i.produto.idProduto})}">x</a> </td>
+        </tr>
+        </tbody>
+
+    </table>
+    <br>
+    <div id="total">
+    <label >TOTAL DA COMPRA: </label>
+    <span th:text="'R$: ' +${session.venda.TotalVenda()}"></span><br>
+    </div><br>
+
+    <!--FORM-->
+    <form  th:action="@{/vendas/save}" th:object="${venda}" method="post">
+        <input type="hidden" th:field="*{idVenda}" >
+        <input type="hidden" th:field="*{localDate}" >
+        <p>Cliente:</p>
+        <select th:field="*{cliente.idCliente}">
+            <option th:each="c : ${clientePF}" th:text="${c.nome}" th:value="${c.idCliente}"></option>
+        </select>
+        <input type="submit" class="btn btn-success finalizar btn-sm" value="Finalizar Compra">
+    </form>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+<style>
+
+    .qtd{
+        max-width: 55px;
+    }
+    #total{
+        background-color: black;
+        color: white;
+    }
+
+</style>
+</div>
+<div th:insert="fragments/footer :: modelfooter"></div>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<html>
+<head>
+  <title>Cadastro de Cliente</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="jumbotron">
+<div th:insert="fragments/header :: modelheader"></div>
+<div class="container">
+  <div class="row">
+    <form class="col" th:action="${clientePF.idCliente == 0} ? @{/clientes/save} : @{/clientes/update}" th:object="${clientePF}" method="post">
+      <input type="hidden" th:field="*{idCliente}">
+      Nome: <input class="form-control" type="text" th:field="*{nome}" placeholder="Nome">
+      CPF: <input class="form-control" type="text" th:field="*{CPF}" placeholder="CPF">
+      <input type="submit" class="btn btn-primary" value="Cadastrar">
+    </form>
+  </div>
+</div>
+<div th:insert="fragments/footer :: modelfooter"></div>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+  body {
+    font-family: 'Noto Sans', sans-serif;
+  }
+</style>
+</body>
+</html>

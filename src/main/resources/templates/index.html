@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+
+</head>
+<body>
+<div th:insert="fragments/header :: modelheader"></div>
+<div class="container boxgeral">
+    <!--<img src="https://cdn.colab55.com/images/5501/studio/289/art/2686/stickers.png"/>-->
+    <h3>Beco Diagonal</h3>
+    <div class="list-group">
+
+        <!--<a href="#" class="list-group-item list-group-item-action active bg-info">Beco Diagonal</a>-->
+        <a href="produtos/cadastrar" class="list-group-item list-group-item-action">Cadastrar Produto</a>
+        <a href="produtos/listar" class="list-group-item list-group-item-action">Listar Produtos</a>
+        <a href="vendas/carrinho" class="list-group-item list-group-item-action">Carrinho</a>
+        <a href="vendas/list" class="list-group-item list-group-item-action">Compras</a>
+        <a href="clientes/cadastrar-cliente" class="list-group-item list-group-item-action">Cadastrar Cliente</a>
+        <a href="clientes/list" class="list-group-item list-group-item-action">Consultar Cliente</a>
+
+
+    </div>
+</div>
+<div th:insert="fragments/footer :: modelfooter"></div>
+</body>
+
+
+</html>
